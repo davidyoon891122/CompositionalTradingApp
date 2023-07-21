@@ -91,6 +91,12 @@ final class LogoInfoCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setupCell(stockInfoModel: StockInfoModel) {
+        imageView.image = UIImage(named: stockInfoModel.imageName)
+        priceLabel.text = "\(stockInfoModel.price)"
+        percentLabel.text = "\(stockInfoModel.change) %"
+    }
 }
 
 private extension LogoInfoCell {

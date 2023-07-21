@@ -86,7 +86,6 @@ final class StockDisplayCell: UICollectionViewCell {
             $0.top.equalTo(labelView.snp.bottom).offset(16.0)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-//            $0.height.equalTo(150)
             $0.bottom.equalToSuperview()
         }
         
@@ -146,9 +145,15 @@ private extension StockDisplayCell {
     
     func configureDatasource() {
         datasource = UICollectionViewDiffableDataSource(collectionView: logoCollectionView, cellProvider: { collectionView, indexPath, item in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LogoInfoCell.identifier, for: indexPath) as? LogoInfoCell else { return UICollectionViewCell() }
-            
-            return cell
+            if let stockInfoModel = item as? StockInfoModel {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LogoInfoCell.identifier, for: indexPath) as? LogoInfoCell else { return UICollectionViewCell() }
+                
+                cell.setupCell(stockInfoModel: stockInfoModel)
+                
+                return cell
+            } else {
+                return UICollectionViewCell()
+            }
         })
         
         applySnapshot()
