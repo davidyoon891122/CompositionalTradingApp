@@ -63,6 +63,8 @@ final class StockDisplayCell: UICollectionViewCell {
         
         collectionView.register(LogoInfoCell.self, forCellWithReuseIdentifier: LogoInfoCell.identifier)
         
+        collectionView.delegate = self
+        
         return collectionView
     }()
     
@@ -110,6 +112,18 @@ final class StockDisplayCell: UICollectionViewCell {
     func setupCell(stockDisplayModel: StockDisplayModel) {
         data = stockDisplayModel.stockInfoModel
         applySnapshot()
+    }
+}
+
+extension StockDisplayCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        let item = data[indexPath.row]
+        stockNameLabel.text = "\(item.name),"
+        
     }
 }
 
