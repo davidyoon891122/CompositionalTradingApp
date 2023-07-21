@@ -64,6 +64,10 @@ final class InformationCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setupCell(informationModel: InformationModel) {
+        titleLabel.text = informationModel.title
+    }
 }
 
 private extension InformationCell {

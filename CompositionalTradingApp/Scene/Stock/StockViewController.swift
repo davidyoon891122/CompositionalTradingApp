@@ -69,6 +69,8 @@ private extension StockViewController {
                 if let infomationModel = item as? InformationModel {
                     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InformationCell.identifier, for: indexPath) as? InformationCell else { return UICollectionViewCell() }
                     
+                    cell.setupCell(informationModel: infomationModel)
+                    
                     return cell
                 } else {
                     return UICollectionViewCell()
